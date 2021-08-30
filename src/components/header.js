@@ -16,9 +16,6 @@ function Header ({ siteTitle }) {
     </Box>
     <Spacer />
     <Box>
-      {/* <Button colorScheme="teal" mr="4">
-        Sign Up
-      </Button>       */}
       <Link as={GatsbyLink} to="/page-2/" >
         <Button colorScheme="teal" mr="4">Log in</Button>
       </Link>
