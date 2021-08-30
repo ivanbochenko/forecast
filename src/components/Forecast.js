@@ -6,6 +6,7 @@ import CityCard from './CityCard'
 import shortid from 'shortid'
 
 function Forecast() {
+    typeof window !== 'undefined' ? localStorage.cities = JSON.stringify([{id: "cT3TiH12y", name: "London", temp: 16.8, description: "overcast clouds", icon: "04d"},]) : {}
     const initialCities = typeof window !== 'undefined' ? JSON.parse(localStorage.cities) : []
     
     const [city, setCity] = useState();
