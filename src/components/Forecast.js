@@ -22,7 +22,7 @@ function Forecast() {
             throw new Error()
         }
         fetch(
-            `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=${!unit ? 'metric' : 'imperial'}&appid=${appId}`
+            `api.openweathermap.org/data/2.5/weather?q=${city}&units=${!unit ? 'metric' : 'imperial'}&appid=${appId}`
         )
         .then(response => response.json())
         .then(r => {
