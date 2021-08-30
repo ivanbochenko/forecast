@@ -6,10 +6,11 @@ import CityCard from './CityCard'
 import shortid from 'shortid'
 
 function Forecast() {
+    const initialCities = typeof window !== 'undefined' ? JSON.parse(localStorage.cities) : []
     
-    let [city, setCity] = useState();
-    let [unit, setUnit] = useBoolean(true);
-    let [cities, setCities] = useState(JSON.parse(localStorage.cities) );
+    const [city, setCity] = useState();
+    const [unit, setUnit] = useBoolean(true);
+    const [cities, setCities] = useState(initialCities);
     const toast = createStandaloneToast()
     const appId = '72b0699b9062ee75120116984cf41032'
 
