@@ -29,7 +29,7 @@ function Forecast() {
         .then(r => {
             if (r.cod !== 200) {
                 handleErr();
-                return defaultCity
+                return cities
             }
             else return {
                 id: shortid.generate(),
