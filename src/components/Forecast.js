@@ -29,7 +29,7 @@ function Forecast() {
         .then(r => {
             if (r.cod !== 200) {
                 handleErr();
-                return cities
+                return null
             }
             else return {
                 id: shortid.generate(),
@@ -39,7 +39,7 @@ function Forecast() {
                 icon: r.weather[0].icon
         }})
         .then(response => {
-            setCities([response, ...cities]);
+            setCities([response.name ? response : null, ...cities]);
         })
         .catch(err => {
             console.log(err.message);
