@@ -8,8 +8,10 @@
 import * as React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
+import { Box } from '@chakra-ui/react'
+import { Link as GatsbyLink } from 'gatsby'
 
-import Header from "./header"
+import Header from "./Header"
 import "./layout.css"
 
 const Layout = ({ children }) => {
@@ -26,24 +28,16 @@ const Layout = ({ children }) => {
   return (
     <>
       <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 960,
-          padding: `0 1.0875rem 1.45rem`,
-        }}
-      >
-        <main>{children}</main>
-        <footer
-          style={{
-            marginTop: `2rem`,
-          }}
-        >
-          © {new Date().getFullYear()}, Built with
+      <Box as="div" p={6} m="0 auto" maxWidth="960px" >
+        <Box as="main" >{children}</Box>
+        <Box as="footer" mt={6} mb={6} fontSize="xl">
+          © {new Date().getFullYear()}, Built by
           {` `}
-          <a href="https://www.gatsbyjs.com">Gatsby</a>
-        </footer>
-      </div>
+          <a as={GatsbyLink} isExternal color="teal.300" href="https://ivanbochenko.github.io" >
+            Ivan Bochenko
+          </a>
+        </Box>
+      </Box>
     </>
   )
 }

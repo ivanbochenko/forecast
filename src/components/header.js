@@ -1,42 +1,29 @@
-import * as React from "react"
-import PropTypes from "prop-types"
-import { Link } from "gatsby"
+import { Box, Heading, Link, Spacer, Button, Flex, useColorModeValue } from '@chakra-ui/react'
+import { Link as GatsbyLink } from 'gatsby'
+import React from 'react'
+import ThemeToggle from './theme-toggle'
 
-const Header = ({ siteTitle }) => (
-  <header
-    style={{
-      background: `rebeccapurple`,
-      marginBottom: `1.45rem`,
-    }}
-  >
-    <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h1>
-    </div>
-  </header>
-)
 
-Header.propTypes = {
-  siteTitle: PropTypes.string,
+export default function Header ({ siteTitle }) {
+    
+  const formBackground = useColorModeValue('gray.100', 'gray.700')
+  return(
+    <Flex background={formBackground} p="6" as="header">
+    <Box>
+      <Link text-decoration='none' as={GatsbyLink} to="/" >
+        <Heading color='teal.300' size="xl">{siteTitle}</Heading>
+      </Link>        
+    </Box>
+    <Spacer />
+    <Box>
+      {/* <Button colorScheme="teal" mr="4">
+        Sign Up
+      </Button>       */}
+      <Link as={GatsbyLink} to="/page-2/" >
+        <Button colorScheme="teal" mr="4">Log in</Button>
+      </Link>
+      <ThemeToggle />
+    </Box>
+  </Flex>
+  )
 }
-
-Header.defaultProps = {
-  siteTitle: ``,
-}
-
-export default Header
