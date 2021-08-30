@@ -32,11 +32,11 @@ function Forecast() {
                 return defaultCity
             }
             else return {
-            id: shortid.generate(),
-            name: r.name,
-            temp: r.main.temp,
-            description: r.weather[0].description,
-            icon: r.weather[0].icon
+                id: shortid.generate(),
+                name: r.name,
+                temp: r.main.temp,
+                description: r.weather[0].description,
+                icon: r.weather[0].icon
         }})
         .then(response => {
             setCities([response, ...cities]);
