@@ -1,5 +1,5 @@
 import React from 'react'
-import {Flex, Stat, StatHelpText, Center, StatLabel, StatNumber, Image, Box, Divider, Spacer, CloseButton, Grid  } from "@chakra-ui/react"
+import {Flex, Stat, StatHelpText, Center, StatLabel, StatNumber, Image, Box, Divider, Spacer, CloseButton } from "@chakra-ui/react"
 
 function CityCard({name, temp, description, icon, onDelete}) {
     return (

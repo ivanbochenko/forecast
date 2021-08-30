@@ -97,8 +97,7 @@ function Forecast() {
                         />
                         ))
                     }
-                </Stack>
-                    
+                </Stack>                    
             </Box>
         </Stack>
     )

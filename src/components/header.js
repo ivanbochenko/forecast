@@ -4,7 +4,7 @@ import React from 'react'
 import ThemeToggle from './theme-toggle'
 
 
-export default function Header ({ siteTitle }) {
+function Header ({ siteTitle }) {
     
   const formBackground = useColorModeValue('gray.100', 'gray.700')
   return(
@@ -27,3 +27,4 @@ export default function Header ({ siteTitle }) {
   </Flex>
   )
 }
+export default Header

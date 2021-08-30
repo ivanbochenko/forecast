@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Flex, Box } from "@chakra-ui/react"
+import { Flex } from "@chakra-ui/react"
 import Seo from "../components/seo"
 import Forecast from "../components/Forecast"
 
