@@ -1,7 +1,7 @@
 import React from 'react'
-import {Flex, Stat, StatHelpText, useColorModeValue, Center, StatLabel, StatNumber, Image, Box, Divider, Spacer, CloseButton } from "@chakra-ui/react"
+import {Flex, Stat, StatHelpText, useColorModeValue, Center, StatLabel, StatNumber, Image, Box, Spacer, CloseButton } from "@chakra-ui/react"
 
-function CityCard({name, temp, description, icon, onDelete}) {
+function CityCard({name, temp, unit, description, icon, onDelete}) {
     
     const formBackground = useColorModeValue('gray.100', 'gray.700')
     return (
@@ -12,7 +12,7 @@ function CityCard({name, temp, description, icon, onDelete}) {
                         <StatLabel>{name}</StatLabel>
 
                         <StatNumber>
-                            {temp}° C
+                            {temp}° {unit === 'metric' ? 'C' : 'F'}
                         </StatNumber>
                         <StatHelpText>
                             {description}

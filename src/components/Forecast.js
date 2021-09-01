@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from 'react'
-import { useBoolean, Box, Spacer, FormControl, FormLabel, Switch, Skeleton, Input, Stack, InputGroup, InputRightElement, IconButton } from "@chakra-ui/react"
+import { Box, Spacer, useBoolean, FormControl, FormLabel, Switch, Skeleton, Input, Stack, InputGroup, InputRightElement, IconButton } from "@chakra-ui/react"
 import {SearchIcon} from '@chakra-ui/icons'
 import { createStandaloneToast } from "@chakra-ui/react"
 import CityCard from './CityCard'
 import shortid from 'shortid'
 
 function Forecast() {
-    const defaultCity = [{id: "cT3TiH12y", name: "London", temp: 16.8, description: "overcast clouds", icon: "04d"},]
-    typeof window !== 'undefined' ? localStorage.cities = JSON.stringify(defaultCity) : {}
     const initialCities = typeof window !== 'undefined' ? JSON.parse(localStorage.cities) : []
     
-    const [city, setCity] = useState();
-    const [unit, setUnit] = useBoolean(true);
+    const [city, setCity] = useState('London');
+    const [boolean, setBoolean] = useBoolean(false);
     const [cities, setCities] = useState(initialCities);
     const toast = createStandaloneToast()
     const appId = '72b0699b9062ee75120116984cf41032'
+
+    const generateUnit = (boolean) => (boolean ? 'metric' : 'imperial')
 
     function getForecast(e) {
         e.preventDefault();
@@ -23,7 +23,7 @@ function Forecast() {
             throw new Error()
         }
         fetch(
-            `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${!unit ? 'metric' : 'imperial'}&appid=${appId}`
+            `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${generateUnit(boolean)}&appid=${appId}`
         )
         .then(response => response.json())
         .then(r => {
@@ -35,6 +35,7 @@ function Forecast() {
                 id: shortid.generate(),
                 name: r.name,
                 temp: r.main.temp,
+                unit: generateUnit(boolean),
                 description: r.weather[0].description,
                 icon: r.weather[0].icon
         }})
@@ -85,21 +86,27 @@ function Forecast() {
                     <FormLabel htmlFor="email-alerts" mr="3">
                         Fahrenheit
                     </FormLabel>
-                    <Switch colorScheme="teal" as="button" onChange={setUnit.toggle}/>                    
+                    <Switch colorScheme="teal" onChange={setBoolean.toggle}/>                    
                     <FormLabel htmlFor="email-alerts" ml="3">
                         Celcius
                     </FormLabel>
                 </FormControl>
                 <Stack>
-                    {cities.map(city => (
-                        <CityCard 
-                            name={city.name} 
-                            temp={city.temp} 
-                            description={city.description}
-                            icon={city.icon}
-                            onDelete={()=> handleDelete(city.id)}
-                        />
-                        ))
+                    {
+                        cities ? cities.map(city => (
+                            <CityCard 
+                                name={city.name} 
+                                temp={city.temp}
+                                unit={city.unit}
+                                description={city.description}
+                                icon={city.icon}
+                                onDelete={()=> handleDelete(city.id)}
+                            />
+                            ))
+                        :
+                        <Skeleton>
+                            <Box p={6}></Box>
+                        </Skeleton>
                     }
                 </Stack>                    
             </Box>
