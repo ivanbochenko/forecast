@@ -8,7 +8,7 @@ function CityCard({name, temp, unit, description, icon, onDelete}) {
         <Box background={formBackground} borderRadius='lg'>
             <Flex p={3}>
                 <Box w={1/3}>
-                    <Stat>
+                    <Stat size="sm">
                         <StatLabel>{name}</StatLabel>
 
                         <StatNumber>
