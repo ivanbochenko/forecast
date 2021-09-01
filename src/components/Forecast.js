@@ -6,21 +6,23 @@ import CityCard from './CityCard'
 import shortid from 'shortid'
 
 function Forecast() {
-    // const defaultCity = {
-    //     id: shortid.generate(),
-    //     name: 'kiev',
-    //     temp: 23,
-    //     unit: 'metric',
-    //     description: 'light intensity drizzle',
-    //     icon: '09d'
-    // }
-
-    // localStorage.cities = JSON.stringify([defaultCity]);
+    const defaultCity = {
+        id: shortid.generate(),
+        name: 'kiev',
+        temp: 23,
+        unit: 'metric',
+        description: 'light intensity drizzle',
+        icon: '09d'
+    }
+    useEffect(() => {
+        localStorage.cities = JSON.stringify([defaultCity]);
+      }, [])
+    
     const initialCities = typeof window !== 'undefined' ? JSON.parse(localStorage.cities) : []
     
     const [city, setCity] = useState('London');
     const [boolean, setBoolean] = useBoolean(false);
-    const [cities, setCities] = useState(initialCities ? initialCities : []);
+    const [cities, setCities] = useState(initialCities);
     const toast = createStandaloneToast()
     const appId = '72b0699b9062ee75120116984cf41032'
 
