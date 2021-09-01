@@ -16,7 +16,7 @@ function Forecast() {
     }
     useEffect(() => {
         localStorage.cities = JSON.stringify([defaultCity]);
-      }, [])
+    }, []);
     
     const initialCities = typeof window !== 'undefined' ? JSON.parse(localStorage.cities) : []
     
