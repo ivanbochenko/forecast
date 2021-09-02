@@ -1,7 +1,7 @@
 import React from 'react'
 import {Flex, Stat, StatHelpText, useColorModeValue, Center, StatLabel, StatNumber, Image, Box, Spacer, CloseButton } from "@chakra-ui/react"
 
-function CityCard({name, temp, unit, description, icon, onDelete}) {
+const CityCard = ({name, temp, unit, description, icon, onDelete}) => {
     
     const formBackground = useColorModeValue('gray.100', 'gray.700')
     return (

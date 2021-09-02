@@ -10,5 +10,4 @@ const IndexPage = () => (
   
   </Flex>
 )
-
 export default IndexPage

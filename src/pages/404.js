@@ -11,5 +11,4 @@ const NotFoundPage = () => (
     </Text>
   </>
 )
-
 export default NotFoundPage
