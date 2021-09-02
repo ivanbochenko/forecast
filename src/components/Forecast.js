@@ -6,18 +6,7 @@ import CityCard from './CityCard'
 import shortid from 'shortid'
 
 const Forecast = () => {
-    // const defaultCity = {
-    //     id: shortid.generate(),
-    //     name: 'kiev',
-    //     temp: 23,
-    //     unit: 'metric',
-    //     description: 'light intensity drizzle',
-    //     icon: '09d'
-    // }
-    // useEffect(() => {
-    //     localStorage.cities = JSON.stringify([defaultCity]);
-    // }, []);
-    
+
     // const initialCities = () => typeof window !== 'undefined' ? JSON.parse(localStorage.cities) : []
     
     const [city, setCity] = useState();
