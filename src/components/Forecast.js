@@ -6,56 +6,49 @@ import CityCard from './CityCard'
 import shortid from 'shortid'
 
 const Forecast = () => {
-
-    // const initialCities = () => typeof window !== 'undefined' ? JSON.parse(localStorage.cities) : []
-    
-    const [city, setCity] = useState();
+    const [city, setCity] = useState('');
     const [boolean, setBoolean] = useBoolean(false);
     const [cities, setCities] = useState([]);
     const toast = createStandaloneToast()
-    const appId = '72b0699b9062ee75120116984cf41032'
-
-    const generateUnit = (boolean) => (boolean ? 'metric' : 'imperial')
-
-    function getForecast(e) {
-        e.preventDefault();
-        if (city.length === 0) {
-            handleErr();
-            throw new Error()
-        }
-        fetch(
-            `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${generateUnit(boolean)}&appid=${appId}`
-        )
-        .then(response => response.json())
-        .then(r => {
-            if (r.cod !== 200) {
-                handleErr();
-                return null
-            }
-            else return {
-                id: shortid.generate(),
-                name: r.name,
-                temp: r.main.temp,
-                unit: generateUnit(boolean),
-                description: r.weather[0].description,
-                icon: r.weather[0].icon
-        }})
-        .then(response => {
-            setCities([response.name ? response : null, ...cities]);
-        })
-        .catch(err => {
-            console.log(err.message);
-        });
-        setCity('');
-    }
+    const appId = '72b0699b9062ee75120116984cf41032'    
 
     useEffect(() => {
         localStorage.cities = JSON.stringify(cities);
       }, [cities]);
 
+    const generateUnit = (boolean) => (boolean ? 'metric' : 'imperial')
+
+    const getForecast = async () => {
+        try {
+            const response = await fetch(
+                `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${generateUnit(boolean)}&appid=${appId}`
+            )
+            const r = await response.json()
+            return {
+                    id: shortid.generate(),
+                    name: r.name,
+                    temp: r.main.temp,
+                    unit: generateUnit(boolean),
+                    description: r.weather[0].description,
+                    icon: r.weather[0].icon
+                } 
+    
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    function handleSubmit(e) {     
+        e.preventDefault();
+        if (city.length === 0) {handleErr()} 
+        else {getForecast().then(v=>v ? setCities([v, ...cities]) : handleErr())}
+        setCity('');
+    }
+
     function handleDelete(id) {
         setCities(cities.filter(item => item.id !== id))
     }
+    
     function handleErr() {
         toast({
             title: "Warning.",
@@ -69,7 +62,7 @@ const Forecast = () => {
     return (
         <Stack w="100%" spacing={6}>
             <Box mt={6}>
-                <form onSubmit={getForecast}>
+                <form onSubmit={handleSubmit}>
                 <InputGroup >
                     <Input 
                         variant="filled"
@@ -79,7 +72,7 @@ const Forecast = () => {
                         value={city}
                         onChange={(e) => setCity(e.target.value)} 
                     />
-                    <InputRightElement children={<IconButton onClick={getForecast} aria-label="Search" icon={<SearchIcon />} />} />
+                    <InputRightElement children={<IconButton onClick={handleSubmit} aria-label="Search" icon={<SearchIcon />} />} />
                 </InputGroup>
                 </form>                
                 <FormControl display="flex" alignItems="center" mb='3' mt='3'>
