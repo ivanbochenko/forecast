@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Box, Spacer, useBoolean, FormControl, FormLabel, Switch, Skeleton, Input, Stack, InputGroup, InputRightElement, IconButton } from "@chakra-ui/react"
+import { Box, Spacer, useBoolean, FormControl, FormLabel, Switch, Skeleton, SkeletonText, SkeletonCircle, Input, Stack, InputGroup, InputRightElement, IconButton } from "@chakra-ui/react"
 import {SearchIcon} from '@chakra-ui/icons'
 import { createStandaloneToast } from "@chakra-ui/react"
 import CityCard from './CityCard'
@@ -7,7 +7,8 @@ import shortid from 'shortid'
 
 const Forecast = () => {
     const [city, setCity] = useState('');
-    const [boolean, setBoolean] = useBoolean(false);
+    const [boolean, setBoolean] = useBoolean(false);    
+    const [loading, setLoading] = useBoolean(true);
     const [cities, setCities] = useState([]);
     const toast = createStandaloneToast()
     const appId = '72b0699b9062ee75120116984cf41032'    
@@ -38,16 +39,17 @@ const Forecast = () => {
         }
     }
 
-    function handleSubmit(e) {     
-        e.preventDefault();
+    function handleSubmit(e) {
+        e.preventDefault()
+        setLoading.toggle()
         if (city.length === 0) {handleErr()} 
         else {getForecast().then(v=>v ? setCities([v, ...cities]) : handleErr())}
-        setCity('');
+        setCity('')
+        setTimeout(() => {
+            setLoading.toggle()
+        }, 1000);
     }
 
-    function handleDelete(id) {
-        setCities(cities.filter(item => item.id !== id))
-    }
     
     function handleErr() {
         toast({
@@ -86,22 +88,18 @@ const Forecast = () => {
                     </FormLabel>
                 </FormControl>
                 <Stack>
-                    {
-                        cities ? cities.map(city => (
+                    
+                    {cities.map(city => (
                             <CityCard 
+                                loading={loading}
                                 name={city.name} 
                                 temp={city.temp}
                                 unit={city.unit}
                                 description={city.description}
                                 icon={city.icon}
-                                onDelete={()=> handleDelete(city.id)}
+                                onDelete={()=> setCities(cities.filter(item => item.id !== city.id))}
                             />
-                            ))
-                        :
-                        <Skeleton>
-                            <Box p={6}></Box>
-                        </Skeleton>
-                    }
+                    )).reverse()}
                 </Stack>                    
             </Box>
         </Stack>
