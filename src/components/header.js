@@ -14,13 +14,8 @@ function Header ({ siteTitle }) {
         <Heading color='teal.300' size="xl">{siteTitle}</Heading>
       </Link>        
     </Box>
-    <Spacer />
-    <Box>
-      <Link as={GatsbyLink} to="/page-2/" >
-        <Button colorScheme="teal" mr="4">Log in</Button>
-      </Link>
-      <ThemeToggle />
-    </Box>
+    <Spacer/>
+    <ThemeToggle/>
   </Flex>
   )
 }
