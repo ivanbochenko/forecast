@@ -9,14 +9,10 @@ function Header ({ siteTitle }) {
   const formBackground = useColorModeValue('gray.100', 'gray.700')
   return(
     <Flex background={formBackground} p="6" as="header">
-    <Box>
-      <Link text-decoration='none' as={GatsbyLink} to="/" >
         <Heading color='teal.300' size="xl">{siteTitle}</Heading>
-      </Link>        
-    </Box>
-    <Spacer />
-    <ThemeToggle />
-  </Flex>
+        <Spacer />
+        <ThemeToggle />
+    </Flex>
   )
 }
 export default Header
