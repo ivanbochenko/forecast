@@ -1,39 +1,33 @@
 import React from 'react'
-import {Flex, Stat, StatHelpText, useBoolean, ScaleFade, useColorModeValue, Center, StatLabel, StatNumber, Image, Box, Spacer, CloseButton } from "@chakra-ui/react"
+import {Flex, Stat, StatHelpText, useBoolean, useColorModeValue, Center, StatLabel, StatNumber, Image, Box, Spacer, CloseButton } from "@chakra-ui/react"
 
-const CityCard = ({name, temp, unit, description, icon, onDelete, loading}) => {
+const CityCard = ({name, temp, unit, description, icon, onDelete}) => {
     const [isOpen, setOpen] = useBoolean()
     const formBackground = useColorModeValue('gray.100', 'gray.700')
-    function handleDelete() {
-        setOpen.toggle()
-        setTimeout(onDelete, 200)
-    }
     return (
-        <ScaleFade in={!isOpen}>
-            <Box background={formBackground} borderRadius='lg'>
-                <Flex p={3}>
-                    <Box w={1/3}>
-                        <Stat size="sm">
-                            <StatLabel>{name}</StatLabel>
+        <Box background={formBackground} borderRadius='lg'>
+            <Flex p={3}>
+                <Box w={1/3}>
+                    <Stat size="sm">
+                        <StatLabel>{name}</StatLabel>
 
-                            <StatNumber>
-                                {temp}° {unit === 'metric' ? 'C' : 'F'}
-                            </StatNumber>
-                            <StatHelpText>
-                                {description}
-                            </StatHelpText> 
-                        </Stat>
+                        <StatNumber>
+                            {temp}° {unit === 'metric' ? 'C' : 'F'}
+                        </StatNumber>
+                        <StatHelpText>
+                            {description}
+                        </StatHelpText> 
+                    </Stat>
+                </Box>
+                <Center w={1/3}>
+                    <Box >
+                        <Image src={'http://openweathermap.org/img/w/' + icon + '.png'}/>
                     </Box>
-                    <Center w={1/3}>
-                        <Box >
-                            <Image src={'http://openweathermap.org/img/w/' + icon + '.png'}/>
-                        </Box>
-                    </Center>
-                    <Spacer/>
-                    <CloseButton mr={0} onClick={handleDelete}/>
-                </Flex>
-            </Box>
-        </ScaleFade>
+                </Center>
+                <Spacer/>
+                <CloseButton mr={0} onClick={onDelete}/>
+            </Flex>
+        </Box>
     )
 }
 
