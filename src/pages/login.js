@@ -13,7 +13,6 @@ export default function SecondPage () {
         <Input placeholder='email' variant='filled' mb={3} type='email'></Input>
         <Input placeholder='********' variant='filled' mb={6} type='password'></Input>
         <Button colorScheme='teal'>Log in</Button>
-        
       </Flex>
     </Flex>
     </>
