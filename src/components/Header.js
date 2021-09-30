@@ -15,12 +15,7 @@ function Header ({ siteTitle }) {
       </Link>        
     </Box>
     <Spacer />
-    <Box>
-      <Link as={GatsbyLink} to="/page-2/" >
-        <Button colorScheme="teal" mr="4">Log in</Button>
-      </Link>
-      <ThemeToggle />
-    </Box>
+    <ThemeToggle />
   </Flex>
   )
 }
