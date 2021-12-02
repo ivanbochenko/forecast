@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
-    title: `Forecast`,
-    description: `Kick off your next commute with Forecast knowledge.`,
+    title: `Prototyping`,
+    description: `Mock pages to quickly show UI and UX`,
     author: `bochenkoivan@gmail.com`,
   },
   plugins: [
@@ -34,8 +34,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Forecast`,
-        short_name: `Forecast`,
+        name: `Prototyping`,
+        short_name: `Prototyping`,
         start_url: `/`,
         background_color: `#4FD1C5`,
         theme_color: `#4FD1C5`,
